@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>hugheszane.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      color-scheme: dark light;
+      --bg: #050816;
+      --card: #0f172a;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, var(--bg) 55%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .shell {
+      width: 100%;
+      max-width: 840px;
+      background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(15,23,42,0.9));
+      border-radius: 18px;
+      padding: 26px 26px 22px;
+      border: 1px solid rgba(148,163,184,0.36);
+      box-shadow:
+        0 18px 45px rgba(15,23,42,0.85),
+        0 0 0 1px rgba(15,23,42,0.9);
+      backdrop-filter: blur(20px);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.4);
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pill-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f97316, #e11d48 40%, #22d3ee 80%);
+      box-shadow: 0 0 12px rgba(56,189,248,0.9);
+    }
+    .pill-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      gap: 24px;
+    }
+    @media (max-width: 720px) {
+      .shell { padding: 20px 18px 18px; }
+      .grid { grid-template-columns: minmax(0, 1fr); }
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .tagline {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 34rem;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      color: var(--muted);
+      background: rgba(15,23,42,0.9);
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 13px;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(to right, #22d3ee, #38bdf8);
+      color: #0f172a;
+      box-shadow: 0 12px 28px rgba(56,189,248,0.35);
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(56,189,248,0.5);
+    }
+    .btn-ghost {
+      background: rgba(15,23,42,0.3);
+      color: var(--muted);
+      border: 1px solid rgba(148,163,184,0.4);
+    }
+    .btn-ghost:hover {
+      background: rgba(15,23,42,0.6);
+    }
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+    .right {
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      background: radial-gradient(circle at 10% 0, rgba(56,189,248,0.14), transparent 55%),
+                  radial-gradient(circle at 100% 100%, rgba(244,63,94,0.14), transparent 55%),
+                  rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .right-label {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 11px;
+      color: #64748b;
+    }
+    .right-metric {
+      font-size: 18px;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .right-sub {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+    .right-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .right-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: 3px 8px;
+      font-size: 10px;
+      color: #cbd5f5;
+      background: rgba(15,23,42,0.85);
+    }
+    .footer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(51,65,85,0.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 11px;
+      color: #64748b;
+    }
+    .footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="pill">
+      <div class="pill-dot"></div>
+      <span class="pill-label">Hughes Zane • Builder’s Card</span>
+    </div>
+
+    <div class="grid">
+      <section>
+        <h1>Experiments in products, content, and community.</h1>
+        <p class="tagline">
+          Lightweight hub for whatever is being built right now: internet businesses, tools, and experiments across media, software, and IRL communities.
+        </p>
+
+        <div class="chips">
+          <span class="chip">Startups & internet businesses</span>
+          <span class="chip">Audience & distribution</span>
+          <span class="chip">SE Asia & global nomad</span>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:hi@hugheszane.com">
+            <span class="btn-icon">✶</span>
+            <span>Say hi</span>
+          </a>
+
+          <a class="btn btn-ghost" href="https://hugheszane.com" target="_blank" rel="noreferrer">
+            <span class="btn-icon">↗</span>
+            <span>Current focus & notes</span>
+          </a>
+        </div>
+      </section>
+
+      <aside class="right">
+        <div>
+          <div class="right-label">Now</div>
+          <div class="right-metric">Designing, testing, shipping.</div>
+          <div class="right-sub">
+            Building lean products, documenting the process, and connecting with operators, founders, and creators.
+          </div>
+        </div>
+
+        <div>
+          <div class="right-label">Working on</div>
+          <div class="right-pill-row">
+            <span class="right-pill">0→1 product ideas</span>
+            <span class="right-pill">Distribution systems</span>
+            <span class="right-pill">Communities IRL & online</span>
+            <span class="right-pill">Travel & real estate plays</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">
+      <span>hugheszane.com</span>
+      <span>Adjust this page anytime in <code>index.html</code> on GitHub.</span>
+    </div>
+  </main>
+</body>
+</html>
